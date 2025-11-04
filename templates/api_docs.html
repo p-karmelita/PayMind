@@ -1,0 +1,714 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Health -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('health-endpoints')">
+        <span class="endpoint-group-title">Health</span>
+        <span class="endpoint-group-count">1 endpoint</span>
+    </div>
+    <div id="health-endpoints" class="endpoints">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('health-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/health</span>
+                <span class="endpoint-description">Health check endpoint</span>
+            </div>
+            <div id="health-details" class="endpoint-details">
+                <p>Check API health status</p>
+                <button class="btn btn-execute" onclick="window.location.href='/health'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Wallet Sets -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('wallet-sets-endpoints')">
+        <span class="endpoint-group-title">Wallet Sets</span>
+        <span class="endpoint-group-count">3 endpoints</span>
+    </div>
+    <div id="wallet-sets-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-wallet-set-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_wallet_set</span>
+                <span class="endpoint-description">Create a new wallet set</span>
+            </div>
+            <div id="create-wallet-set-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_wallet_set'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-wallet-set-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_wallet_set</span>
+                <span class="endpoint-description">Get wallet set by ID</span>
+            </div>
+            <div id="get-wallet-set-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_wallet_set'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-all-wallet-sets-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_all_wallet_sets</span>
+                <span class="endpoint-description">List all wallet sets</span>
+            </div>
+            <div id="get-all-wallet-sets-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_all_wallet_sets'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Wallets -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('wallets-endpoints')">
+        <span class="endpoint-group-title">Wallets</span>
+        <span class="endpoint-group-count">10 endpoints</span>
+    </div>
+    <div id="wallets-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-wallet-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_wallet</span>
+                <span class="endpoint-description">Create a new wallet</span>
+            </div>
+            <div id="create-wallet-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_wallet'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-wallets-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_wallets</span>
+                <span class="endpoint-description">List all wallets</span>
+            </div>
+            <div id="list-wallets-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_wallets'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('retrieve-wallet-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/retrieve_wallet</span>
+                <span class="endpoint-description">Retrieve wallet by ID</span>
+            </div>
+            <div id="retrieve-wallet-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/retrieve_wallet'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('update-wallet-details')">
+                <span class="method put">PUT</span>
+                <span class="endpoint-path">/update_wallet</span>
+                <span class="endpoint-description">Update wallet</span>
+            </div>
+            <div id="update-wallet-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/update_wallet'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-wallets-balances-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_wallets_with_balances</span>
+                <span class="endpoint-description">List wallets with balances</span>
+            </div>
+            <div id="list-wallets-balances-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_wallets_with_balances'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-token-balance-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_token_balance_for_a_wallet</span>
+                <span class="endpoint-description">Get token balance for wallet</span>
+            </div>
+            <div id="get-token-balance-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_token_balance_for_a_wallet'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('derive-wallet-details')">
+                <span class="method put">PUT</span>
+                <span class="endpoint-path">/derive_a_wallet</span>
+                <span class="endpoint-description">Derive a wallet</span>
+            </div>
+            <div id="derive-wallet-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/derive_a_wallet'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-nfts-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_nfts_for_a_wallet</span>
+                <span class="endpoint-description">Get NFTs for wallet</span>
+            </div>
+            <div id="get-nfts-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_nfts_for_a_wallet'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-user-wallets-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_user_wallets</span>
+                <span class="endpoint-description">Create user-controlled wallets</span>
+            </div>
+            <div id="create-user-wallets-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_user_wallets'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Transactions -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('transactions-endpoints')">
+        <span class="endpoint-group-title">Transactions</span>
+        <span class="endpoint-group-count">16 endpoints</span>
+    </div>
+    <div id="transactions-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-transactions-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_transactions</span>
+                <span class="endpoint-description">List all transactions</span>
+            </div>
+            <div id="list-transactions-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_transactions'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-transaction-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_transaction</span>
+                <span class="endpoint-description">Get transaction by ID</span>
+            </div>
+            <div id="get-transaction-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-lowest-nonce-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_lowest_nonce_transaction</span>
+                <span class="endpoint-description">Get lowest nonce pending transaction</span>
+            </div>
+            <div id="get-lowest-nonce-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_lowest_nonce_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-transfer-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_transfer_transaction</span>
+                <span class="endpoint-description">Create transfer transaction</span>
+            </div>
+            <div id="create-transfer-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_transfer_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('validate-address-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/validate_address</span>
+                <span class="endpoint-description">Validate blockchain address</span>
+            </div>
+            <div id="validate-address-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/validate_address'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('estimate-fee-contract-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/estimate_fee_contract_execution</span>
+                <span class="endpoint-description">Estimate fee for contract execution</span>
+            </div>
+            <div id="estimate-fee-contract-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/estimate_fee_contract_execution'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('estimate-fee-transfer-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/estimate_fee_transfer</span>
+                <span class="endpoint-description">Estimate fee for transfer</span>
+            </div>
+            <div id="estimate-fee-transfer-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/estimate_fee_transfer'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-contract-execution-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_contract_execution_transaction</span>
+                <span class="endpoint-description">Create contract execution transaction</span>
+            </div>
+            <div id="create-contract-execution-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_contract_execution_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-wallet-upgrade-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_wallet_upgrade_transaction</span>
+                <span class="endpoint-description">Create wallet upgrade transaction</span>
+            </div>
+            <div id="create-wallet-upgrade-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_wallet_upgrade_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('cancel-transaction-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/cancel_transaction</span>
+                <span class="endpoint-description">Cancel a transaction</span>
+            </div>
+            <div id="cancel-transaction-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/cancel_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('accelerate-transaction-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/accelerate_transaction</span>
+                <span class="endpoint-description">Accelerate a transaction</span>
+            </div>
+            <div id="accelerate-transaction-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/accelerate_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-transfer-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_transfer</span>
+                <span class="endpoint-description">Create challenge for transfer</span>
+            </div>
+            <div id="create-challenge-transfer-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_transfer'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-accelerate-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_accelerate_transaction</span>
+                <span class="endpoint-description">Create challenge to accelerate transaction</span>
+            </div>
+            <div id="create-challenge-accelerate-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_accelerate_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-cancel-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_cancel_transaction</span>
+                <span class="endpoint-description">Create challenge to cancel transaction</span>
+            </div>
+            <div id="create-challenge-cancel-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_cancel_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-contract-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_contract_execution</span>
+                <span class="endpoint-description">Create challenge for contract execution</span>
+            </div>
+            <div id="create-challenge-contract-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_contract_execution'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-wallet-upgrade-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_wallet_upgrade</span>
+                <span class="endpoint-description">Create challenge for wallet upgrade</span>
+            </div>
+            <div id="create-challenge-wallet-upgrade-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_wallet_upgrade'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Signing -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('signing-endpoints')">
+        <span class="endpoint-group-title">Signing</span>
+        <span class="endpoint-group-count">7 endpoints</span>
+    </div>
+    <div id="signing-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('sign-message-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/sign_message</span>
+                <span class="endpoint-description">Sign a message</span>
+            </div>
+            <div id="sign-message-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/sign_message'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('sign-typed-data-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/sign_typed_data</span>
+                <span class="endpoint-description">Sign typed data</span>
+            </div>
+            <div id="sign-typed-data-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/sign_typed_data'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('sign-transaction-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/sign_transaction</span>
+                <span class="endpoint-description">Sign a transaction</span>
+            </div>
+            <div id="sign-transaction-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/sign_transaction'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('sign-delegate-action-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/sign_delegate_action</span>
+                <span class="endpoint-description">Sign delegate action</span>
+            </div>
+            <div id="sign-delegate-action-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/sign_delegate_action'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-sign-message-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_sign_message</span>
+                <span class="endpoint-description">Create challenge to sign message</span>
+            </div>
+            <div id="create-challenge-sign-message-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_sign_message'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-sign-typed-data-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_sign_typed_data</span>
+                <span class="endpoint-description">Create challenge to sign typed data</span>
+            </div>
+            <div id="create-challenge-sign-typed-data-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_sign_typed_data'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-challenge-sign-transaction-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_challenge_sign_transaction</span>
+                <span class="endpoint-description">Create challenge to sign transaction</span>
+            </div>
+            <div id="create-challenge-sign-transaction-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_challenge_sign_transaction'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tokens -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('tokens-endpoints')">
+        <span class="endpoint-group-title">Tokens</span>
+        <span class="endpoint-group-count">1 endpoint</span>
+    </div>
+    <div id="tokens-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-token-details-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_token_details</span>
+                <span class="endpoint-description">Get token details</span>
+            </div>
+            <div id="get-token-details-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_token_details'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modular Wallets -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('modular-wallets-endpoints')">
+        <span class="endpoint-group-title">Modular Wallets</span>
+        <span class="endpoint-group-count">8 endpoints</span>
+    </div>
+    <div id="modular-wallets-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-transfers-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_transfers</span>
+                <span class="endpoint-description">List transfers</span>
+            </div>
+            <div id="list-transfers-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_transfers'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('retrieve-transfer-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/retrieve_transfer</span>
+                <span class="endpoint-description">Retrieve transfer by ID</span>
+            </div>
+            <div id="retrieve-transfer-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/retrieve_transfer'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-user-operations-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_user_operations</span>
+                <span class="endpoint-description">List user operations</span>
+            </div>
+            <div id="list-user-operations-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_user_operations'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('retrieve-user-operation-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/retrieve_user_operation</span>
+                <span class="endpoint-description">Retrieve user operation by ID</span>
+            </div>
+            <div id="retrieve-user-operation-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/retrieve_user_operation'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-buidl-wallet-balances-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_buidl_wallet_balances</span>
+                <span class="endpoint-description">Get BUIDL wallet balances</span>
+            </div>
+            <div id="get-buidl-wallet-balances-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_buidl_wallet_balances'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-buidl-wallet-nfts-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_buidl_wallet_nfts</span>
+                <span class="endpoint-description">Get BUIDL wallet NFTs</span>
+            </div>
+            <div id="get-buidl-wallet-nfts-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_buidl_wallet_nfts'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-buidl-balances-by-blockchain-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_buidl_wallet_balances_by_blockchain</span>
+                <span class="endpoint-description">Get BUIDL wallet balances by blockchain</span>
+            </div>
+            <div id="get-buidl-balances-by-blockchain-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_buidl_wallet_balances_by_blockchain'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-buidl-nfts-by-blockchain-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_buidl_wallet_nfts_by_blockchain</span>
+                <span class="endpoint-description">Get BUIDL wallet NFTs by blockchain</span>
+            </div>
+            <div id="get-buidl-nfts-by-blockchain-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_buidl_wallet_nfts_by_blockchain'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Authentication -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('user-auth-endpoints')">
+        <span class="endpoint-group-title">User Authentication</span>
+        <span class="endpoint-group-count">4 endpoints</span>
+    </div>
+    <div id="user-auth-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-device-token-social-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/get_device_token_social</span>
+                <span class="endpoint-description">Get device token for social login</span>
+            </div>
+            <div id="get-device-token-social-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_device_token_social'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-device-token-email-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/get_device_token_email</span>
+                <span class="endpoint-description">Get device token for email login</span>
+            </div>
+            <div id="get-device-token-email-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_device_token_email'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('refresh-user-token-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/refresh_user_token</span>
+                <span class="endpoint-description">Refresh user token</span>
+            </div>
+            <div id="refresh-user-token-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/refresh_user_token'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('resend-otp-email-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/resend_otp_email</span>
+                <span class="endpoint-description">Resend OTP email</span>
+            </div>
+            <div id="resend-otp-email-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/resend_otp_email'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PIN Authentication -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('pin-auth-endpoints')">
+        <span class="endpoint-group-title">PIN Authentication</span>
+        <span class="endpoint-group-count">5 endpoints</span>
+    </div>
+    <div id="pin-auth-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-user-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_user</span>
+                <span class="endpoint-description">Create a user</span>
+            </div>
+            <div id="create-user-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_user'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-user-token-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_user_token</span>
+                <span class="endpoint-description">Create user token</span>
+            </div>
+            <div id="create-user-token-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_user_token'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('create-pin-challenge-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/create_pin_challenge</span>
+                <span class="endpoint-description">Create PIN challenge</span>
+            </div>
+            <div id="create-pin-challenge-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/create_pin_challenge'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('update-pin-challenge-details')">
+                <span class="method put">PUT</span>
+                <span class="endpoint-path">/update_pin_challenge</span>
+                <span class="endpoint-description">Update PIN challenge</span>
+            </div>
+            <div id="update-pin-challenge-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/update_pin_challenge'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('restore-pin-challenge-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/restore_pin_challenge</span>
+                <span class="endpoint-description">Restore PIN challenge</span>
+            </div>
+            <div id="restore-pin-challenge-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/restore_pin_challenge'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Users -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('users-endpoints')">
+        <span class="endpoint-group-title">Users</span>
+        <span class="endpoint-group-count">5 endpoints</span>
+    </div>
+    <div id="users-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-users-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_users</span>
+                <span class="endpoint-description">List all users</span>
+            </div>
+            <div id="list-users-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_users'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-user-by-id-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_user_by_id</span>
+                <span class="endpoint-description">Get user by ID</span>
+            </div>
+            <div id="get-user-by-id-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_user_by_id'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('list-challenges-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/list_challenges</span>
+                <span class="endpoint-description">List challenges</span>
+            </div>
+            <div id="list-challenges-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/list_challenges'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-challenge-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_challenge</span>
+                <span class="endpoint-description">Get challenge by ID</span>
+            </div>
+            <div id="get-challenge-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_challenge'">Execute</button>
+            </div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('get-user-details')">
+                <span class="method get">GET</span>
+                <span class="endpoint-path">/get_user</span>
+                <span class="endpoint-description">Get current user</span>
+            </div>
+            <div id="get-user-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/get_user'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Compliance -->
+<div class="endpoint-group">
+    <div class="endpoint-group-header" onclick="toggleEndpointGroup('compliance-endpoints')">
+        <span class="endpoint-group-title">Compliance</span>
+        <span class="endpoint-group-count">1 endpoint</span>
+    </div>
+    <div id="compliance-endpoints" class="endpoints" style="display: none;">
+        <div class="endpoint">
+            <div class="endpoint-summary" onclick="toggleEndpoint('screen-blockchain-address-details')">
+                <span class="method post">POST</span>
+                <span class="endpoint-path">/screen_blockchain_address</span>
+                <span class="endpoint-description">Screen blockchain address</span>
+            </div>
+            <div id="screen-blockchain-address-details" class="endpoint-details">
+                <button class="btn btn-execute" onclick="window.location.href='/screen_blockchain_address'">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

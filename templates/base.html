@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayMind API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fafafa;
+            color: #3b4151;
+        }
+
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+            padding: 20px 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #3b4151;
+        }
+
+        .header p {
+            color: #6b7785;
+            margin-top: 8px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px;
+        }
+
+        .endpoint-group {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .endpoint-group-header {
+            background-color: #f7f7f7;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e8e8e8;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .endpoint-group-header:hover {
+            background-color: #efefef;
+        }
+
+        .endpoint-group-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #3b4151;
+        }
+
+        .endpoint-group-count {
+            background-color: #e8e8e8;
+            color: #6b7785;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .endpoints {
+            padding: 10px;
+        }
+
+        .endpoint {
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            margin: 10px;
+            overflow: hidden;
+        }
+
+        .endpoint-summary {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            background-color: white;
+            transition: background-color 0.2s;
+        }
+
+        .endpoint-summary:hover {
+            background-color: #f7f7f7;
+        }
+
+        .method {
+            font-weight: 700;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-right: 15px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .method.get {
+            background-color: #61affe;
+            color: white;
+        }
+
+        .method.post {
+            background-color: #49cc90;
+            color: white;
+        }
+
+        .method.put {
+            background-color: #fca130;
+            color: white;
+        }
+
+        .method.delete {
+            background-color: #f93e3e;
+            color: white;
+        }
+
+        .endpoint-path {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            color: #3b4151;
+            flex: 1;
+        }
+
+        .endpoint-description {
+            color: #6b7785;
+            font-size: 13px;
+            margin-left: auto;
+            padding-left: 20px;
+        }
+
+        .endpoint-details {
+            display: none;
+            padding: 20px;
+            background-color: #fafafa;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .endpoint-details.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #3b4151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-execute {
+            background-color: #4990e2;
+            color: white;
+        }
+
+        .btn-execute:hover {
+            background-color: #3a7bc8;
+        }
+
+        .btn-clear {
+            background-color: #e8e8e8;
+            color: #3b4151;
+            margin-left: 10px;
+        }
+
+        .btn-clear:hover {
+            background-color: #d4d4d4;
+        }
+
+        .response-section {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .response-section.active {
+            display: block;
+        }
+
+        .response-header {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #3b4151;
+        }
+
+        .response-body {
+            background-color: #41444e;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4990e2;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s;
+        }
+
+        .collapse-icon.rotated {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PayMind API Documentation</h1>
+        <p>Circle Web3 Services API - Interactive Documentation</p>
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        function toggleEndpointGroup(groupId) {
+            const group = document.getElementById(groupId);
+            const icon = document.getElementById(groupId + '-icon');
+            if (group.style.display === 'none' || group.style.display === '') {
+                group.style.display = 'block';
+                if (icon) icon.classList.add('rotated');
+            } else {
+                group.style.display = 'none';
+                if (icon) icon.classList.remove('rotated');
+            }
+        }
+
+        function toggleEndpoint(endpointId) {
+            const endpoint = document.getElementById(endpointId);
+            endpoint.classList.toggle('active');
+        }
+
+        async function executeRequest(endpointUrl, method, formId, responseId) {
+            const form = document.getElementById(formId);
+            const responseSection = document.getElementById(responseId);
+            const responseBody = responseSection.querySelector('.response-body');
+
+            responseSection.classList.add('active');
+            responseBody.textContent = 'Loading...';
+
+            try {
+                const formData = new FormData(form);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+
+                if (method !== 'GET') {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(endpointUrl, options);
+                const result = await response.text();
+
+                try {
+                    const jsonResult = JSON.parse(result);
+                    responseBody.textContent = JSON.stringify(jsonResult, null, 2);
+                } catch {
+                    responseBody.textContent = result;
+                }
+            } catch (error) {
+                responseBody.textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function clearForm(formId) {
+            document.getElementById(formId).reset();
+        }
+    </script>
+</body>
+</html>
